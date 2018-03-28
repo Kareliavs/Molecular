@@ -1,44 +1,51 @@
 #include <bits/stdc++.h>
 using namespace std;
 ///compila asi ---> g++ Alinemiento.cpp -o a
-unsigned t0, t1;
-string s, t; 
-int m, n,a,b,c,maxi;
+unsigned t0, t1,t2,t3;
+string s, t,comienzo; 
+int m, n,a,b,c,maxi,mt,nt;
 vector<string> aux;
 vector<vector<string> > ruta;
-
-string cadenas(string coord,int m,int n, string acum)
-{
-	if(coord!="000")
+int numero=0;
+int maxtotal=1;
+ofstream fs("nombre.txt"); 
+string cadenas(string coord,int m,int n, string acum, string acum2)
+{ //cout<<"CHOSES "<<coord<<endl;
+	if(coord!="NNN" )
 	{
 		if(coord[0]=='1')//100
 		{
 			string acumh=t[n-1]+acum;
-			cadenas(ruta[m-1][n-1],m-1,n-1,acumh);
+			string acumh2=s[m-1]+acum2;
+			cadenas(ruta[m-1][n-1],m-1,n-1,acumh,acumh2);
 		}
 		if(coord[1]=='1')//010
 		{
-			//cout<<acum<<endl;
+			//fs<<acum<<endl;
 			string acumi="-"+acum;
-			///cout<<"cositas "<<ruta[m-1][n]<<"  "<<acum<<endl;
-			cadenas(ruta[m-1][n],m-1,n,acumi);
+			string acumi2=s[m-1]+acum2;
+			///fs<<"cositas "<<ruta[m-1][n]<<"  "<<acum<<endl;
+			cadenas(ruta[m-1][n],m-1,n,acumi,acumi2);
 		}
 		if(coord[2]=='1')//001
 		{
 			string acumj=t[n-1]+acum;
-			cadenas(ruta[m][n-1],m,n-1,acumj);
+			string acumj2=t[m]+acum2;
+			cadenas(ruta[m][n-1],m,n-1,acumj,acumj2);
 		}
 
 	}
-	else cout<<s<<endl<<acum<<endl<<endl;
+	else 
+	{
+	fs<<acum2<<endl<<acum<<endl<<endl;
+	numero++;
+	}
 	//if(coord[0]=="1")
 	return acum;
 }
 int main()
 {
-	cout<<"s: ";
 	cin>>s;
-	cout<<endl<<"t: ";
 	cin>>t;
 	m=s.length();
 	n=t.length();
@@ -46,6 +53,11 @@ int main()
 	{	swap(m,n);
 		s.swap(t);
 	}
+
+	fs<<"s: ";
+	fs<<s<<endl;
+	fs<<endl<<"t: ";
+	fs<<t<<endl;
 
 	int mat[m+1][n+1];
 	string route[m+1][n+1];
@@ -77,37 +89,59 @@ int main()
 				c=mat[i][j-1]-2;
 				maxi=max(a,max(b,c));
 				route[i][j]="000";
-				if(a==maxi) route[i][j][0]='1';
-				if(b==maxi) route[i][j][1]='1';
-				if(c==maxi) route[i][j][2]='1';
-				//cout<<a<<" "<<b<<" "<<c<<endl;
+				if(maxi>0)
+				{
+					if(a==maxi) route[i][j][0]='1';
+					if(b==maxi) route[i][j][1]='1';
+					if(c==maxi) route[i][j][2]='1';
+				}
+				else if(maxi<=0)
+				{
+					route[i][j]="NNN";
+					maxi=0;
+				}
+				if (maxi>=maxtotal)
+				{
+					maxtotal=maxi;
+					comienzo=route[i][j];
+					mt=i;
+					nt=j;
+					//cout<<comienzo<<" "<<maxtotal<<endl;
+				}
+				//fs<<a<<" "<<b<<" "<<c<<endl;
 				mat[i][j]=maxi;
 			}
 	t1 = clock();
 	///impresion
-	cout<<"\t"<<"-";
+	fs<<"\t"<<"-";
 	for(int j=0;j<=n;j++)
-		cout<<t[j-1]<<"\t";	
-	cout<<endl;
+		fs<<t[j-1]<<"\t";	
+	fs<<endl;
 	for(int i=0;i<=m;i++)
-	{	if(i==0)	cout<<"-"<<"\t";
-		else cout<<s[i-1]<<"\t";
+	{	if(i==0)	fs<<"-"<<"\t";
+		else fs<<s[i-1]<<"\t";
 		for(int j=0;j<=n;j++)
 		{
-			cout<<mat[i][j]<<" "<<route[i][j]<<"\t";
+			fs<<mat[i][j]<<" "<<route[i][j]<<"\t";
 			aux.push_back(route[i][j]);
 		}	
 		ruta.push_back(aux);
 		aux.clear();
-		cout<<endl;
+		fs<<endl;
 	}	
 	///rutas
-	cout<<"Alineamientos----------"<<endl;
-	cadenas(route[m][n],m,n,"");
-	cout<<"Score------------------"<<endl;
-	cout<<mat[m][n]<<endl;
+	fs<<"Alineamientos----------"<<endl;
+	t2=clock();
+	cadenas(comienzo,mt,nt,"","");
+	t3=clock();
+	fs<<"Total de alineamientos "<<numero<<endl;
+	fs<<"Score------------------"<<endl;
+	fs<<maxtotal<<endl;
 	 
 	double time = (double(t1-t0)/1000/*CLOCKS_PER_SEC*/);
-	cout << "Tiempo de ejecucion: " << time << endl;
+	double time2 = (double(t3-t2)/1000/*CLOCKS_PER_SEC*/);
+	fs << "Tiempo de ejecucion DP: " << time << endl;
+	fs << "Tiempo de ejecucion CADENAS: " << time2 << endl;
+	fs.close();
 	return 0;
 }
