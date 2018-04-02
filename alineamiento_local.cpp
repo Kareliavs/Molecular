@@ -37,8 +37,7 @@ string cadenas(string coord,int m,int n, string acum, string acum2)
 	}
 	else 
 	{
-	cout<<acum2<<endl<<acum<<endl<<endl;
-	fs<<acum2<<endl<<endl;
+	fs<<acum2<<endl<<acum<<endl<<endl;
 	numero++;
 	}
 	//if(coord[0]=="1")
