@@ -10,7 +10,7 @@ int numero=0;
 int maxtotal=1;
 ofstream fs("nombre.txt"); 
 string cadenas(string coord,int m,int n, string acum, string acum2)
-{ //cout<<"CHOSES "<<coord<<endl;
+{ cout<<"CHOSES "<<coord<<endl;
 	if(coord!="NNN" )
 	{
 		if(coord[0]=='1')//100
@@ -64,18 +64,18 @@ int main()
 	t0=clock();
 	///iniciañizacion
 	mat[0][0]=0;	
-	route[0][0]="000";					
+	route[0][0]="NNN";					
 	for(int i=1;i<=m;i++)
 	{
 		mat[i][0]=0;
-		route[i][0]="000";
+		route[i][0]="NNN";
 	}	
 
 
 	for(int i=1;i<=n;i++)
 	{
 		mat[0][i]=0;
-		route[0][i]="000";
+		route[0][i]="NNN";
 	}	
 	///llenado
 	for(int i=1;i<=m;i++)
