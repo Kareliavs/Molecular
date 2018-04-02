@@ -10,7 +10,7 @@ int numero=0;
 int maxtotal=1;
 ofstream fs("nombre.txt"); 
 string cadenas(string coord,int m,int n, string acum, string acum2)
-{ cout<<"CHOSES "<<coord<<endl;
+{ //cout<<"CHOSES "<<coord<<endl;
 	if(coord!="NNN" )
 	{
 		if(coord[0]=='1')//100
@@ -37,7 +37,8 @@ string cadenas(string coord,int m,int n, string acum, string acum2)
 	}
 	else 
 	{
-	fs<<acum2<<endl<<acum<<endl<<endl;
+	cout<<acum2<<endl<<acum<<endl<<endl;
+	fs<<acum2<<endl<<endl;
 	numero++;
 	}
 	//if(coord[0]=="1")
