@@ -34,7 +34,8 @@ string cadenas(string coord,int m,int n, string acum, string acum2)
 		if(coord[2]=='1')//001
 		{
 			string acumj=t[n-1]+acum;
-			string acumj2=t[m-1]+acum2;
+			//string acumj2=t[m-1]+acum2;
+			string acumj2="-"+acum2;
 			cadenas(ruta[m][n-1],m,n-1,acumj,acumj2);
 		}
 
