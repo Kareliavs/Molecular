@@ -42,10 +42,13 @@ string cadenas(string coord,int m,int n, string acum, string acum2)
 	else 
 	{
 		if(coord!="000")return acum;
-	fs<<acum2<<endl<<acum<<endl<<endl;
-	//cout<<m<<" ; "<<n<<endl;
-	cout<<acum2<<" "<<acum2.size()<<endl<<acum<<" "<<acum.size()<<endl<<endl;
-	numero++;
+	if(acum==acum2)
+		{
+		fs<<acum2<<endl<<acum<<endl<<endl;
+		//cout<<m<<" ; "<<n<<endl;
+		cout<<acum2<<" "<<acum2.size()<<endl<<acum<<" "<<acum.size()<<endl<<endl;
+		numero++;
+		}
 	}
 	//if(coord[0]=="1")
 	return acum;
