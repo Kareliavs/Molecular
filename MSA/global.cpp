@@ -171,13 +171,13 @@ pair<string,int> global(string a1,string b1)
 			}
 	
 	///impresion
-	fs<<"\t"<<"-";
+	//fs<<"\t"<<"-";
 	/*for(int j=0;j<=n;j++)
 		fs<<t[j-1]<<"\t";	
 	fs<<endl;*/
 	for(int i=0;i<=m;i++)
-	{	if(i==0)	fs<<"-"<<"\t";
-		else fs<<s[i-1]<<"\t";
+	{	/*if(i==0)	fs<<"-"<<"\t";
+		else fs<<s[i-1]<<"\t";*/
 		for(int j=0;j<=n;j++)
 		{
 			//fs<<mat[i][j]<<" "<<route[i][j]<<"\t";
@@ -288,8 +288,8 @@ int main()
 			
 		}
 	}
-	cout<<"Alineamiento final"<<endl;
-	fs<<"Alineamiento final"<<endl;
+	cout<<endl<<"Alineamiento final"<<endl;
+	fs<<endl<<"Alineamiento final"<<endl;
 	for(int i=0;i<num_cad;i++)
 	{
 		cout<<cadenas_finales[i]<<endl;
@@ -308,8 +308,8 @@ int main()
 		}	
 		//cout<<endl<<"POR COLUMNA:"<<score_final<<endl;
 	}
-    fs << "Score: " << score_final << endl;
-    cout << "Score: " << score_final << endl; 
+    fs <<endl<<"Score: " << score_final << endl;
+    cout<<endl<<"Score: " << score_final << endl; 
     /*score_final=0;
     cadenas_finales.clear();
     cout<<"PARTIENDO DESDE "<<score_final<<cadenas_finales.size()<<endl;

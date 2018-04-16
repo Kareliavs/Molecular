@@ -1,14 +1,16 @@
-	--	A	T	T	G	C	C	A	T	T		--	A	T	T	G	C	C	A	T	T		--	A	T	T	G	C	C	A	T	T		--	A	T	T	G	C	C	A	T	T		--	A	T	G	G	C	C	A	T	T		--	A	T	G	G	C	C	A	T	T		--	A	T	G	G	C	C	A	T	T		--	A	T	C	C	A	A	T	T	T	T		--	A	T	C	C	A	A	T	T	T	T		--	A	T	C	T	T	C	T	T	0	7	-2	0	-3	 = 2
+0	7	-2	0	-3	 = 2
 7	0	-2	0	-4	 = 1
 -2	-2	0	0	-7	 = -11
 0	0	0	0	-3	 = -3
 -3	-4	-7	-3	0	 = -17
-	--	A	T	T	G	C	C	A	T	T		--	A	T	T	G	C	C	A	T	T		--	A	T	T	G	C	C	A	T	T	-	-		--	A	T	T	G	C	C	A	T	T	-	-	Alineamiento final
+
+Alineamiento final
 ATTGCCATT--
 ATGGCCATT--
 A-TCCAATTTT
 ATCTTC-TT--
 ACTGAC----C
+
 Score: -62
-Tiempo de ejecucion DP: 0.687
-Tiempo de ejecucion CADENAS: 0.368
+Tiempo de ejecucion DP: 0.654
+Tiempo de ejecucion CADENAS: 0.371
