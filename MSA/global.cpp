@@ -219,10 +219,17 @@ void completar_cadenas(int n)
 }
 int sc(char a, char b)
 {
-	if(a=='-' or b=='-') return -2;
+	if((a=='-' or b=='-') and (a!=b)) return -2;//-2
+	if(a=='-' and b=='-') return 0;
 	else if(a==b) return 1;
 	else if(a!=b) return -1;
 }
+/*int sc(char a, char b)
+{
+	if(a=='-' or b=='-') return -2;
+	else if(a==b) return 1;
+	else if(a!=b) return -1;
+}*/
 int main()
 {
 	int num_cad;
