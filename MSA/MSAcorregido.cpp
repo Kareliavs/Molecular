@@ -290,9 +290,9 @@ int main()
 		if(i!=pos)
 		{	//cout<<i<<": "<< cadenas[i]<<endl;
 			string tmp = alineamientos_mem[pos][i];//global(cadenas_finales[0],cadenas[i]).first;
-			cout<<i<<" : "<< tmp<<endl;
+			//cout<<i<<" : "<< tmp<<endl;
 			if(long_maxima < tmp.size()) long_maxima=tmp.size();
-			//cadenas_finales.push_back(tmp);
+			cadenas_finales.push_back(tmp);
 			completar_cadenas(long_maxima);
 			
 		}
