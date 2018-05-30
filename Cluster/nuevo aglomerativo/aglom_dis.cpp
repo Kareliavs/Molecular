@@ -21,9 +21,9 @@ vector<string> cabeceras;
 void imprimir2()
 {	
 
-	cout<<"k = "<<iteraciones<<"\t min: "<<cabeceras[min(coordminx,coordminy)]<<cabeceras[max(coordminx,coordminy)]<<"\t"<<minimo<<endl;
-	fs<<"k = "<<iteraciones<<"\t min: "<<cabeceras[min(coordminx,coordminy)]<<cabeceras[max(coordminx,coordminy)]<<"\t"<<minimo<<endl;
-	distancias[ cabeceras[min(coordminx,coordminy)]+cabeceras[max(coordminx,coordminy)] ]=minimo;
+	cout<<"k = "<<iteraciones<<"\t min: "<<cabeceras[coordminx]<<cabeceras[coordminy]<<"\t"<<minimo<<endl;
+	fs<<"k = "<<iteraciones<<"\t min: "<<cabeceras[coordminx]<<cabeceras[coordminy]<<"\t"<<minimo<<endl;
+	distancias[ cabeceras[coordminx]+cabeceras[coordminy] ]=minimo;
 	iteraciones++;
 }
 void leer()
@@ -95,14 +95,14 @@ void hacer_matriz()
 				if(i==1 and j==0)
 				{
 					minimo = ingreso;
-					coordminx =i;
-					coordminy =j;
+					coordminx =min(i,j);
+					coordminy =max(i,j);
 				}
 				if(ingreso<minimo)
 				{
 					minimo = ingreso;
-					coordminx =i;
-					coordminy =j;
+					coordminx =min(i,j);
+					coordminy =max(i,j);
 				}
 			
 		}	
@@ -137,15 +137,15 @@ void inicio()
 			if(i==1 and j==0)
 			{
 				minimo = ingreso;
-				coordminx =i;
-				coordminy =j;
+				coordminx =min(i,j);
+				coordminy =max(i,j);
 			}
 			
 			if(ingreso<minimo)
 			{
 				minimo = ingreso;
-				coordminx =i;
-				coordminy =j;
+				coordminx =min(i,j);
+				coordminy =max(i,j);
 			}
 
 		}
@@ -158,8 +158,8 @@ map<string, map<string,float> > agrupando(map<string, map<string,float> > matriz
 {
 	vector<string>cabecerasanterior=cabeceras;
 	vector<vector<float>> matrizsalida;
-	int pos1 = min(coordminx,coordminy);
-	int pos2 = max(coordminx,coordminy);
+	int pos1 = coordminx;
+	int pos2 = coordminy;
 
 	cabeceras[pos1]= cabecerasanterior[pos1]+cabecerasanterior[pos2];
 	string cluster = cabeceras[pos1];
@@ -170,9 +170,17 @@ map<string, map<string,float> > agrupando(map<string, map<string,float> > matriz
 	salida=matriz;
 	salida.erase(cabecerasanterior[pos1]);
 	salida.erase(cabecerasanterior[pos2]);
-	t0=clock();
+	for (map<string, map<string,float> >::iterator  iteradorgrande=salida.begin(); iteradorgrande!=salida.end(); ++iteradorgrande)
+	 {
+	 	salida[iteradorgrande->first].erase(cabecerasanterior[pos1]);
+	 	salida[iteradorgrande->first].erase(cabecerasanterior[pos2]);
+	 }
 	
-	for(int i=0; i<cabeceras.size(); i++)
+	int tope=cabeceras.size();
+	float temp;
+	t0=clock();
+	//cout<<"HOLA 1"<<endl;
+	for(int i=0; i<tope; i++)
 	{
 		float valor;
 
@@ -182,23 +190,47 @@ map<string, map<string,float> > agrupando(map<string, map<string,float> > matriz
 		salida[ cluster ][ cabeceras[i] ] = valor;
 		salida[ cabeceras[i] ][ cluster ] = valor;
 	}
+	//cout<<"HOLA 2"<<endl; 4.0458
 	minimo = salida[ cabeceras[0] ][ cabeceras[1] ];
 	coordminx =0;
 	coordminy =1;
-	
-	for(int i=0; i<cabeceras.size(); i++)
-	{
+	//cout<<"HOLA 3"<<endl;
+	for(int i=0; i<tope; i++)
+	{   	//cout<<"HOLA 3.1"<<endl;
 		for(int j=0; j<i; j++)
-		{
-			if(salida[ cabeceras[i] ][ cabeceras[j] ]<minimo)
-			{
-				minimo = salida[ cabeceras[i] ][ cabeceras[j] ];
-				coordminx =i;
-				coordminy =j;
-			}
-			
+		{   	//cout<<"HOLA 3.2"<<endl;
+			temp=salida[ cabeceras[i] ][ cabeceras[j] ];
+			//cout<<cabeceras[i]<<cabeceras[j]<<"\t";
+			if(temp<minimo)
+			{   //cout<<"ENTRE"<<endl;
+				minimo = temp;
+				coordminx =min(i,j);
+				coordminy =max(i,j);
+			}//cout<<"HOLA 3.3"<<endl;
 		}
+		//cout<<endl;
 	}
+   // cout<<"---------------------------------------------------------------------"<<endl;
+	/*int i=0, j;
+	 for (map<string, map<string,float> >::iterator iteradorgrande=salida.begin(); iteradorgrande!=salida.end(); ++iteradorgrande)
+	 {  j=0;
+	 	for(map<string,float>::iterator iteradorchico=iteradorgrande->second.begin(); iteradorchico!=next(iteradorgrande->second.begin(),i); ++iteradorchico)
+	 	{   //cout<<"esto es:"<<i<<" , "<<j<<endl;
+	 		//cout<<iteradorgrande->first<<iteradorchico->first<<"\t";//<<"("<<i<<","<<j<<")";
+	 		if(iteradorchico->second<minimo)
+	 		{   //cout<<iteradorchico->second<<" < "<<minimo<<"    "<<coordminx<<" >> "<< i<<" and "<<coordminy<<" >> "<<j<<endl;
+	 			//cout<<"*"<<endl;
+	 			minimo =iteradorchico->second;
+	 			coordminx =min(i,j);
+				coordminy =max(i,j);
+	 		}
+	 		//cout<<"\t";
+	 		++j;
+	 	}
+	 //	cout<<endl;
+	 	++i;
+	 	
+	 }	*/
 	
 	t1 = clock();
 	double time0 = (double(t1-t0)/1000/*CLOCKS_PER_SEC*/);
